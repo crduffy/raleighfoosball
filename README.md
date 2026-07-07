@@ -2,7 +2,7 @@
 
 The website for the Raleigh Foosball community — weekly Tornado and Bonzini
 DYP tournaments at Snookers Billiards, Raleigh, NC.
-
+ 
 Built with [Astro](https://astro.build) (static output, Vite under the hood).
 
 ## Develop
