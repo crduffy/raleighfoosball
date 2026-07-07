@@ -1,0 +1,208 @@
+/* ————————————————————————————————————————
+   Raleigh Foosball · "Table Lights"
+   Palette pulled from the room itself:
+   black ceilings, chalk scoreboards, the
+   orange Bonzini rail, felt-green playfield.
+———————————————————————————————————————— */
+
+:root {
+  --pitch: #0e1113;        /* the dark room */
+  --pitch-deep: #0a0c0e;
+  --surface: #171b1e;      /* table cabinet */
+  --surface-2: #1d2326;
+  --line: #262d32;
+  --chalk: #ede7da;        /* warm scoreboard chalk */
+  --smoke: #a4a89f;        /* muted copy */
+  --rail: #ff7a29;         /* Bonzini rail orange */
+  --rail-hot: #ffa45c;     /* rail catching the light */
+  --felt: #4cc27e;         /* playfield green */
+
+  --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --max: 1120px;
+  --pad: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--pitch);
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--chalk);
+  background: var(--pitch);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--rail-hot); text-decoration: none; }
+a:hover { color: var(--chalk); }
+
+:focus-visible {
+  outline: 2px solid var(--rail);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection { background: var(--rail); color: var(--pitch-deep); }
+
+/* ——— type roles ——— */
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  line-height: 0.95;
+  color: var(--chalk);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rail);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.muted { color: var(--smoke); }
+
+/* ——— layout ——— */
+
+.wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+}
+
+.section {
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.section-head {
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.section-head .eyebrow { display: block; margin-bottom: 0.9rem; }
+
+.section-head h2 {
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+}
+
+/* ——— buttons ——— */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.8rem 1.6rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-solid {
+  background: var(--rail);
+  color: var(--pitch-deep);
+}
+.btn-solid:hover {
+  background: var(--rail-hot);
+  color: var(--pitch-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 122, 41, 0.35);
+}
+
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--chalk);
+  background: rgba(255, 255, 255, 0.02);
+}
+.btn-ghost:hover {
+  border-color: var(--rail);
+  color: var(--rail-hot);
+  transform: translateY(-2px);
+}
+
+/* ——— "lit" card: light falls on the table ——— */
+
+.lit {
+  position: relative;
+  background:
+    radial-gradient(120% 55% at 50% 0%, rgba(255, 190, 120, 0.09), transparent 60%),
+    var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lit::before {
+  content: '';
+  position: absolute;
+  inset: 0 12% auto 12%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rail-hot), transparent);
+  opacity: 0.9;
+}
+
+/* ——— scoreline: the Bonzini bead counter ——— */
+
+.scoreline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  justify-content: center;
+  padding-block: 0.25rem;
+}
+
+.scoreline i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--rail);
+  flex: none;
+}
+
+.scoreline .rod {
+  height: 2px;
+  width: clamp(40px, 8vw, 110px);
+  background: var(--line);
+  border-radius: 2px;
+}
+
+.scoreline i.open {
+  background: transparent;
+  border: 1.5px solid var(--line);
+}
+
+/* ——— motion ——— */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

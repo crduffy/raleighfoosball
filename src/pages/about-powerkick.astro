@@ -1,0 +1,162 @@
+---
+import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
+import crest from '../assets/crest.png';
+import bonziniNight from '../assets/bonzini-night.jpg';
+import worldsBalcony from '../assets/worlds-balcony.jpg';
+---
+
+<Base
+  title="About Powerkick | Raleigh Foosball"
+  description="Powerkick is the team name for the Raleigh Foosball player group — competitive on the Bonzini USA tour across North Carolina, South Carolina, and Virginia."
+>
+  <section class="section about-hero">
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <span class="eyebrow">The team behind the nights</span>
+        <h1>About<br />Powerkick</h1>
+        <p>
+          Powerkick is the team name for the Raleigh Foosball player group.
+          Many of our players are competitive on the Bonzini USA foosball
+          tour, and over the years Powerkick has provided tremendous support
+          — and found a lot of success — at every level of the tour.
+        </p>
+        <p class="muted">
+          Bonzini tournaments are held all across North Carolina, South
+          Carolina, and Virginia, and Raleigh players regularly travel to
+          compete — all the way up to the World Championships.
+        </p>
+      </div>
+      <div class="about-crest">
+        <div class="crest-patch">
+          <Image src={crest} alt="The Powerkick crest — Raleigh, NC" widths={[360, 720]} sizes="(max-width: 900px) 70vw, 380px" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="scoreline" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><span class="rod"></span><i class="open"></i>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap bonzini-grid">
+      <div class="bonzini-photo lit">
+        <Image
+          src={bonziniNight}
+          alt="Rows of Bonzini tables mid-tournament at Snookers"
+          widths={[480, 760, 1100]}
+          sizes="(max-width: 900px) 100vw, 480px"
+        />
+      </div>
+      <div class="bonzini-copy">
+        <span class="eyebrow">The other table</span>
+        <h2>What is Bonzini<br />foosball?</h2>
+        <p>
+          Bonzini is a French-style foosball table with steel player figures,
+          telescopic rods, and a single goalie. The table is popular on the
+          East Coast of the US, in Canada, and across Europe — and it plays
+          very differently from the American-style Tornado.
+        </p>
+        <p class="muted">
+          Curious? Come try it on a Friday night — the first one's on us.
+        </p>
+        <div class="bonzini-cta">
+          <a href="/contact-us/" class="btn btn-solid">Contact us</a>
+          <a href="/#nights" class="btn btn-ghost">See the weekly nights</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section worlds">
+    <div class="wrap">
+      <figure class="worlds-figure lit">
+        <Image
+          src={worldsBalcony}
+          alt="Raleigh players on a Bourbon Street balcony at the World Championships of Foosball in New Orleans"
+          widths={[640, 1080, 1600]}
+          sizes="(max-width: 900px) 100vw, 1040px"
+        />
+        <figcaption class="mono muted">
+          Powerkick on the road — World Championships, New Orleans
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about-hero { padding-bottom: clamp(2rem, 5vw, 4rem); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(2rem, 6vw, 4rem);
+    align-items: center;
+  }
+
+  .about-copy .eyebrow { display: block; margin-bottom: 1rem; }
+
+  .about-copy h1 {
+    font-size: clamp(3.2rem, 8vw, 5.5rem);
+    font-weight: 800;
+    margin-bottom: 1.4rem;
+  }
+
+  .about-copy p { max-width: 34rem; margin-bottom: 1rem; }
+
+  .about-crest { display: grid; place-items: center; }
+
+  .crest-patch {
+    background: #f0f0e4;
+    border-radius: 18px;
+    padding: clamp(1.2rem, 3vw, 2rem);
+    max-width: 380px;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 30px 80px rgba(0, 0, 0, 0.55),
+      0 0 60px rgba(255, 150, 60, 0.08);
+    transform: rotate(-1.5deg);
+  }
+
+  .bonzini-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+
+  .bonzini-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 4 / 5;
+  }
+
+  .bonzini-copy .eyebrow { display: block; margin-bottom: 1rem; }
+  .bonzini-copy h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 1.2rem; }
+  .bonzini-copy p { max-width: 32rem; margin-bottom: 1rem; }
+
+  .bonzini-cta { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-top: 1.6rem; }
+
+  .worlds { padding-top: 0; }
+
+  .worlds-figure :global(img) { width: 100%; object-fit: cover; }
+
+  .worlds-figure figcaption {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .about-crest { order: -1; }
+    .crest-patch { max-width: 260px; }
+    .bonzini-grid { grid-template-columns: 1fr; }
+  }
+</style>

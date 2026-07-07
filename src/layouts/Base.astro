@@ -1,0 +1,216 @@
+---
+import '@fontsource/big-shoulders-display/600.css';
+import '@fontsource/big-shoulders-display/700.css';
+import '@fontsource/big-shoulders-display/800.css';
+import '@fontsource/barlow/400.css';
+import '@fontsource/barlow/500.css';
+import '@fontsource/barlow/600.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import crest from '../assets/crest.png';
+import crestMark from '../assets/crest-mark.png';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const links = {
+  facebookMain: 'https://www.facebook.com/groups/raleighfoosball/',
+  facebookTornado: 'https://www.facebook.com/groups/1040531949295319/',
+  stats: 'https://stats.raleighfoosball.com',
+  youtube: 'https://www.youtube.com/@raleighfoosball919',
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a href="/" class="brand" aria-label="Raleigh Foosball home">
+          <span class="crest-chip">
+            <Image src={crestMark} alt="" width={104} densities={[1, 2]} />
+          </span>
+          <span class="wordmark">Raleigh<br />Foosball</span>
+        </a>
+        <nav aria-label="Main">
+          <a href="/">Home</a>
+          <a href="/about-powerkick/">About Powerkick</a>
+          <a href="/contact-us/">Contact</a>
+          <a href={links.stats} class="ext">Stats<span aria-hidden="true"> ↗</span></a>
+          <a href={links.youtube} class="ext">YouTube<span aria-hidden="true"> ↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="scoreline" aria-hidden="true">
+          <i></i><i></i><i></i><span class="rod"></span><i class="open"></i><i class="open"></i><i class="open"></i>
+        </div>
+
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="crest-chip large">
+              <Image src={crest} alt="Powerkick crest — Raleigh, NC" width={112} densities={[1, 2]} />
+            </span>
+            <p class="display footer-motto">Fun. Family.<br />Foosball.</p>
+          </div>
+
+          <div class="footer-col">
+            <p class="eyebrow">Find us</p>
+            <p>
+              Snookers Billiards<br />
+              3520 Wade Ave<br />
+              Raleigh, NC 27607
+            </p>
+            <p class="mono muted">Thu &amp; Fri nights, every week</p>
+          </div>
+
+          <div class="footer-col">
+            <p class="eyebrow">Follow along</p>
+            <a href={links.facebookMain}>Facebook — Raleigh Foosball</a>
+            <a href={links.facebookTornado}>Facebook — Tornado group</a>
+            <a href={links.stats}>League stats ↗</a>
+            <a href={links.youtube}>YouTube ↗</a>
+          </div>
+
+          <div class="footer-col">
+            <p class="eyebrow">Pages</p>
+            <a href="/">Home</a>
+            <a href="/about-powerkick/">About Powerkick</a>
+            <a href="/contact-us/">Contact us</a>
+          </div>
+        </div>
+
+        <p class="mono muted footer-fine">© {new Date().getFullYear()} Raleigh Foosball · All skill levels welcome</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 12, 14, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .crest-chip {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 52px;
+    border-radius: 9px;
+    background: #f0f0e4; /* the crest patch, sewn on a black jersey */
+    overflow: hidden;
+    flex: none;
+  }
+  .crest-chip img { width: 52px; height: auto; }
+
+  .crest-chip.large { width: 96px; height: 96px; border-radius: 14px; }
+  .crest-chip.large img { width: auto; height: 86px; }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    line-height: 0.92;
+    letter-spacing: 0.04em;
+    color: var(--chalk);
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.9rem, 2.5vw, 1.6rem);
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--chalk);
+    letter-spacing: 0.02em;
+  }
+  nav a:hover { color: var(--rail-hot); }
+  nav a.ext { color: var(--smoke); }
+  nav a.ext:hover { color: var(--rail-hot); }
+
+  .site-footer {
+    border-top: 1px solid var(--line);
+    background: var(--pitch-deep);
+    padding-block: 3rem 2rem;
+    margin-top: clamp(3rem, 8vw, 6rem);
+  }
+
+  .site-footer .scoreline { margin-bottom: 2.5rem; }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 0.8fr;
+    gap: 2rem;
+  }
+
+  .footer-brand { display: flex; flex-direction: column; gap: 1rem; }
+
+  .footer-motto {
+    font-size: 1.9rem;
+    font-weight: 700;
+  }
+
+  .footer-col { display: flex; flex-direction: column; gap: 0.45rem; align-items: flex-start; }
+  .footer-col .eyebrow { margin-bottom: 0.4rem; }
+  .footer-col a { color: var(--chalk); font-size: 0.95rem; }
+  .footer-col a:hover { color: var(--rail-hot); }
+  .footer-col p { font-size: 0.95rem; }
+
+  .footer-fine {
+    margin-top: 3rem;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .header-inner { justify-content: center; }
+    nav { justify-content: center; }
+  }
+</style>
